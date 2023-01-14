@@ -1,12 +1,13 @@
 package com.training.dao;
 
 import com.training.entity.Book;
-import com.training.ifaces.CrudRepository;
+import com.training.ifaces.BookRepository;
 import com.training.utils.DbConnections;
 
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
-public class BookRepoImpl implements CrudRepository<Book> {
+public class BookRepoImpl implements BookRepository<Book> {
     private Connection con;
 
     public BookRepoImpl() {
@@ -33,12 +34,14 @@ public class BookRepoImpl implements CrudRepository<Book> {
     @Override
     public boolean save(Book t) {
         int rowAdded=1;
-        String sql="insert into bajaj_book value(?,?,?,?)"; //placeholder
+        String sql="insert into bajaj_book value(?,?,?,?,?)"; //placeholder
         try(PreparedStatement pstmt = this.con.prepareStatement(sql)){
             pstmt.setInt(1,t.getBookId());
             pstmt.setString(2, t.getBookName());
             pstmt.setString(3,t.getAuthor());
             pstmt.setDouble(4,t.getPrice());
+            Date pubDate = Date.valueOf(t.getDateOfPublications());
+            pstmt.setDate(5, pubDate);
 
             rowAdded = pstmt.executeUpdate();
 
@@ -110,4 +113,10 @@ public class BookRepoImpl implements CrudRepository<Book> {
 		}
         return rowsDeleted;
     }
+
+	@Override
+	public Book findByAuthor(String authorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
