@@ -1,5 +1,6 @@
 package com.training.entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Book implements Comparable<Book>{
@@ -8,6 +9,7 @@ public class Book implements Comparable<Book>{
     private String bookName;
     private String author;
     private double price;
+    private LocalDate dateOfPublications;
 
     @Override
     public boolean equals(Object o) {
@@ -31,8 +33,19 @@ public class Book implements Comparable<Book>{
                 ", price=" + price +
                 '}';
     }
+    
+    
 
-    public Book(int bookId, String bookName, String author, double price) {
+    public Book(int bookId, String bookName, String author, double price, LocalDate dateOfPublications) {
+		super();
+		BookId = bookId;
+		this.bookName = bookName;
+		this.author = author;
+		this.price = price;
+		this.dateOfPublications = dateOfPublications;
+	}
+
+	public Book(int bookId, String bookName, String author, double price) {
         BookId = bookId;
         this.bookName = bookName;
         this.author = author;
@@ -70,8 +83,17 @@ public class Book implements Comparable<Book>{
     public void setPrice(double price) {
         this.price = price;
     }
+    
 
-    @Override
+    public LocalDate getDateOfPublications() {
+		return dateOfPublications;
+	}
+
+	public void setDateOfPublications(LocalDate dateOfPublications) {
+		this.dateOfPublications = dateOfPublications;
+	}
+
+	@Override
     public int compareTo(Book otherobj) {
         return this.bookName.compareTo(otherobj.bookName);
     }
