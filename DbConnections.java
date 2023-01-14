@@ -1,5 +1,7 @@
 package com.training.utils;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 /**
  * 
  * @author Abhishek Arora
@@ -15,7 +17,12 @@ public class DbConnections {
 		
 		Connection con=null;
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "abhishek");
+			Properties prop = new Properties();
+			InputStream inStream =DbConnections.class.getClassLoader().getResourceAsStream("application.properties");
+			prop.load(inStream);
+			con = DriverManager.getConnection(prop.getProperty("datasource.mysql.url"),
+					prop.getProperty("datasource.mysql.username"),
+					prop.getProperty("datasource.mysql.password"));
 			
 		} catch (Exception e) {
 			// TODO: handle exception
