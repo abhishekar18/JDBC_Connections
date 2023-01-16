@@ -24,5 +24,13 @@ public class BookService {
 	
 	public List<Book> findBookByCondition(Predicate<Book> condition){
 		return this.list.stream().filter(condition).collect(toList());
+	
+	}
+	
+	public Set<String> getAllBookNames(){
+		return this.list.stream().map(e->e.getBookName()).collect(toSet());
+	}
+	public List<String> getBookNamesGrtThan(double value){
+		return this.list.stream().filter(e->e.getPrice()>value).map(e->e.getBookName()).collect(toList());
 	}
 }
