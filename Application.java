@@ -2,8 +2,6 @@ package com.training.utils;
 
 import com.training.dao.BookRepoImpl;
 import com.training.entity.Book;
-import com.training.utils.DbConnections;
-
 import java.time.LocalDate;
 import java.util.*;
 import java.util.Optional;
@@ -13,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(DbConnections.getMySqlConnection());
 
-        int key=1;
+        int key=3;
         BookRepoImpl repo= new BookRepoImpl();
 
         switch (key){
