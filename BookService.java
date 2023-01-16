@@ -1,11 +1,9 @@
 package com.training.dao;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.function.Predicate;
 
 import com.training.entity.Book;
-
-import java.util.function.*;
 
 import static java.util.stream.Collectors.*;		//static import
 
@@ -15,7 +13,6 @@ public class BookService {
 
 	public BookService() {
 		super();
-		// TODO Auto-generated constructor stub
 		BookRepoImpl dao = new BookRepoImpl();
 		list= dao.findAll();	
 	}
@@ -25,4 +22,7 @@ public class BookService {
 		return this.list.stream().filter(e->e.getPrice()>value).collect(toList());
 	}
 	
+	public List<Book> findBookByCondition(Predicate<Book> condition){
+		return this.list.stream().filter(condition).collect(toList());
+	}
 }
