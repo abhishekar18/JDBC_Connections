@@ -1,6 +1,7 @@
 package com.training.dao;
 
-import java.util.function.Predicate;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 import com.training.entity.Book;
 
@@ -19,6 +20,26 @@ public class StreamsExample {
 		
 //		collective usage of map and filter intermediate operations
 		service.getBookNamesGrtThan(500).forEach(System.out::println);
-	
+
+//		using toMap static method
+		service.getBookNameAndPrice().forEach((key,value)-> System.out.println(key+"\t "+value));	
+		
+//		using max function
+		System.out.println(service.findMaxPrice());
+		
+//		using min function
+		System.out.println(service.findMinPrice());
+//		
+//		System.out.println(service.totalBookPublishedPerYear(2006));
+		
+		
+		LinkedList<Book> dbList = service.transformtoLinkedList();
+		ListIterator<Book> itr = dbList.listIterator();
+		while(itr.hasNext())
+				System.out.println(itr.next().getBookName());
+		while(itr.hasPrevious())
+				System.out.println(itr.previous().getBookName());
+		
+		
 	}
 }
